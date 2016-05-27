@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Radiowave</title>
+
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var components = [];
+			var resolution_x = 39;
+			var resolution_y = 19;
+			var size = 30;
+			var wrapper = document.createElement('div');
+			
+			wrapper.className = 'wrapper';
+			wrapper.style.width = (resolution_x * size) + 'px';
+			wrapper.style.height = (resolution_y * size) + 'px';
+
+			document.body.appendChild(wrapper);
+
+			function setAttributes(el, attrs) {
+				for(var key in attrs) {
+					el.setAttribute(key, attrs[key]);
+				}
+			}
+
+			for(var x = 0; x < resolution_x; x++) {
+				for(var y = 0; y < resolution_y; y++) {
+					var el = document.createElement('input');
+
+					setAttributes(el, {
+						'name': 'radio',
+						'type': 'radio'
+					});
+
+					wrapper.appendChild(el);
+
+					var component = {
+						element: el,
+						x: x * size,
+						y: y * size
+					}
+
+					el.style.left = component.x + 'px';
+					el.style.top = component.y + 'px';
+					el.addEventListener('change', this.toggle.bind(this, component));
+
+					components.push(component);
+				}
+			}
+
+			function toggle(targetComponent) {
+				var checked = targetComponent.element.checked;
+
+				components.forEach(function(component) {
+					var distance_x = targetComponent.x - component.x;
+					var distance_y = targetComponent.y - component.y;
+					var distance = Math.sqrt(distance_x * distance_x + distance_y * distance_y);
+
+					setTimeout(function() {
+						component.element.className = '';
+						component.element.offsetWidth;
+						component.element.className = 'grow';
+					}, Math.round(distance * 5));
+				});
+			}
+
+			setTimeout(function() {
+				components[370].element.checked = true;
+				toggle(components[370]);
+			}, 2000);
+		</script>
+	</body>
+</html>
