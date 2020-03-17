@@ -1,60 +1,64 @@
+body {
+    overflow: hidden;
+}
+
 .wrapper {
-	bottom: 0;
-	left: 0;
-	margin: auto;
-	position: absolute;
-	right: 0;
-	top: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 input {
-	position: absolute;
+    position: absolute;
 }
 
 input.grow {
-	-webkit-animation: grow 1s;
-	-moz-animation: grow 1s;
-	animation: grow 1s;
+    -webkit-animation: grow 0.75s;
+    -moz-animation: grow 0.75s;
+    animation: grow 0.75s;
+    z-index: 1000;
 }
 
 @-webkit-keyframes grow {
-	0% {
-		-webkit-transform: scale(1);
-	}
+    0% {
+        -webkit-transform: scale(1);
+    }
 
-	50% {
-		-webkit-transform: scale(5);
-	}
+    25% {
+        -webkit-transform: scale(5);
+    }
 
-	100% {
-		-webkit-transform: scale(1);
-	}
+    50% {
+        -webkit-transform: scale(1);
+    }
 }
 
 @-moz-keyframes grow {
-	0% {
-		-moz-transform: scale(1);
-	}
+    0% {
+        -moz-transform: scale(1);
+    }
 
-	50% {
-		-moz-transform: scale(5);
-	}
+    50% {
+        -moz-transform: scale(5);
+    }
 
-	100% {
-		-moz-transform: scale(1);
-	}
+    100% {
+        -moz-transform: scale(1);
+    }
 }
 
 @keyframes grow {
-	0% {
-		transform: scale(1);
-	}
+    0% {
+        transform: scale(1);
+    }
 
-	50% {
-		transform: scale(5);
-	}
+    50% {
+        transform: scale(5);
+    }
 
-	100% {
-		transform: scale(1);
-	}
+    100% {
+        transform: scale(1);
+    }
 }

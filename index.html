@@ -1,78 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Radiowave</title>
+    <head>
+        <title>Radiowave</title>
 
-		<meta charset="utf-8">
+        <meta charset="utf-8" />
 
-		<link rel="stylesheet" href="style.css" media="screen" type="text/css" />
-	</head>
+        <link
+            rel="stylesheet"
+            href="style.css"
+            media="screen"
+            type="text/css"
+        />
+    </head>
 
-	<body>
-		<script type="text/javascript">
-			var components = [];
-			var resolution_x = 39;
-			var resolution_y = 19;
-			var size = 30;
-			var wrapper = document.createElement('div');
-			
-			wrapper.className = 'wrapper';
-			wrapper.style.width = (resolution_x * size) + 'px';
-			wrapper.style.height = (resolution_y * size) + 'px';
+    <body>
+        <script type="text/javascript">
+            var winW = window.innerWidth;
+            var winH = window.innerHeight;
+            var components = [];
+            var size = 20;
+            var numX = winW / size - 1;
+            var numY = winH / size - 1;
+            var wrapper = document.createElement("div");
 
-			document.body.appendChild(wrapper);
+            wrapper.className = "wrapper";
+            wrapper.style.width = numX * size + "px";
+            wrapper.style.height = numY * size + "px";
 
-			function setAttributes(el, attrs) {
-				for(var key in attrs) {
-					el.setAttribute(key, attrs[key]);
-				}
-			}
+            document.body.appendChild(wrapper);
 
-			for(var x = 0; x < resolution_x; x++) {
-				for(var y = 0; y < resolution_y; y++) {
-					var el = document.createElement('input');
+            function setAttributes(el, attrs) {
+                for (var key in attrs) {
+                    el.setAttribute(key, attrs[key]);
+                }
+            }
 
-					setAttributes(el, {
-						'name': 'radio',
-						'type': 'radio'
-					});
+            for (var x = 0; x < numX; x++) {
+                for (var y = 0; y < numY; y++) {
+                    var el = document.createElement("input");
 
-					wrapper.appendChild(el);
+                    setAttributes(el, {
+                        name: "radio",
+                        type: "radio"
+                    });
 
-					var component = {
-						element: el,
-						x: x * size,
-						y: y * size
-					}
+                    wrapper.appendChild(el);
 
-					el.style.left = component.x + 'px';
-					el.style.top = component.y + 'px';
-					el.addEventListener('change', this.toggle.bind(this, component));
+                    var component = {
+                        element: el,
+                        x: x * size,
+                        y: y * size
+                    };
 
-					components.push(component);
-				}
-			}
+                    el.style.left = component.x + "px";
+                    el.style.top = component.y + "px";
+                    el.addEventListener(
+                        "change",
+                        this.toggle.bind(this, component)
+                    );
 
-			function toggle(targetComponent) {
-				var checked = targetComponent.element.checked;
+                    components.push(component);
+                }
+            }
 
-				components.forEach(function(component) {
-					var distance_x = targetComponent.x - component.x;
-					var distance_y = targetComponent.y - component.y;
-					var distance = Math.sqrt(distance_x * distance_x + distance_y * distance_y);
+            function toggle(targetComponent) {
+                var checked = targetComponent.element.checked;
 
-					setTimeout(function() {
-						component.element.className = '';
-						component.element.offsetWidth;
-						component.element.className = 'grow';
-					}, Math.round(distance * 5));
-				});
-			}
+                components.forEach(function(component) {
+                    var distance_x = targetComponent.x - component.x;
+                    var distance_y = targetComponent.y - component.y;
+                    var distance = Math.sqrt(
+                        distance_x * distance_x + distance_y * distance_y
+                    );
 
-			setTimeout(function() {
-				components[370].element.checked = true;
-				toggle(components[370]);
-			}, 2000);
-		</script>
-	</body>
+                    setTimeout(function() {
+                        component.element.className = "";
+                        component.element.offsetWidth;
+                        component.element.checked = true;
+                        component.element.className = "grow";
+                    }, Math.round(distance * 5));
+                });
+            }
+
+            // auto run
+            // setTimeout(function() {
+            //     components[370].element.checked = true;
+            //     toggle(components[370]);
+            // }, 2000);
+        </script>
+    </body>
 </html>
