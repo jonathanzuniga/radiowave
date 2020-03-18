@@ -36,12 +36,14 @@
                 }
             }
 
+            var i = 0;
+
             for (var x = 0; x < numX; x++) {
                 for (var y = 0; y < numY; y++) {
                     var el = document.createElement("input");
 
                     setAttributes(el, {
-                        name: "radio",
+                        name: "radio-" + i,
                         type: "radio"
                     });
 
@@ -61,8 +63,12 @@
                     );
 
                     components.push(component);
+
+                    i++;
                 }
             }
+
+            alert("Radios: " + i);
 
             function toggle(targetComponent) {
                 var checked = targetComponent.element.checked;
