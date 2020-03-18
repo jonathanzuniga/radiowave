@@ -15,9 +15,9 @@ input {
 }
 
 input.grow {
-    -webkit-animation: grow 0.75s;
-    -moz-animation: grow 0.75s;
-    animation: grow 0.75s;
+    -webkit-animation: grow 0.5s;
+    -moz-animation: grow 0.5s;
+    animation: grow 0.5s;
     z-index: 1000;
 }
 
